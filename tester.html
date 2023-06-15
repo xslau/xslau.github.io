@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub Repositories</title>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>My GitHub Repositories</h1>
+  <ul id="repo-list"></ul>
+
+  <script>
+    // Replace 'YOUR_USERNAME' with your GitHub username
+    const username = 'xslau';
+
+    fetch(`https://api.github.com/users/${username}/repos`)
+      .then(response => response.json())
+      .then(data => {
+        const repoList = document.getElementById('repo-list');
+        data.forEach(repo => {
+          const listItem = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = repo.html_url;
+          link.textContent = repo.name;
+          listItem.appendChild(link);
+          repoList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.log(error));
+  </script>
+</body>
+</html>
+
